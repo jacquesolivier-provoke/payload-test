@@ -26,6 +26,7 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
+    home: Home;
     header: Header;
     footer: Footer;
   };
@@ -611,6 +612,27 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: number;
+  hero: {
+    media: number | Media;
+    title: string;
+    body?: string | null;
+    ctas?:
+      | {
+          link: string;
+          buttonText: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

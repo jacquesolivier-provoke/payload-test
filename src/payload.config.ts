@@ -31,6 +31,7 @@ import { Header } from './Header/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
+import HomePage from './globals/home/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -131,7 +132,7 @@ export default buildConfig({
       path: '/seed',
     },
   ],
-  globals: [Header, Footer],
+  globals: [HomePage, Header, Footer],
   plugins: [
     redirectsPlugin({
       collections: ['pages', 'posts'],
