@@ -9,22 +9,22 @@ services:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
+    command: sh -c "yarn install && yarn payload generate:types && yarn run payload migrate && yarn dev"
     depends_on:
-      - mongo
+      - postgres
     env_file:
       - .env
 
-  mongo:
-    image: mongo:latest
+  postgres:
+    image: postgres:latest
     ports:
-      - '27017:27017'
-    command:
-      - --storageEngine=wiredTiger
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=payload-test
     volumes:
-      - data:/data/db
-    logging:
-      driver: none
+      - data:/var/lib/postgresql/data # Persist data
 
 volumes:
   data:
